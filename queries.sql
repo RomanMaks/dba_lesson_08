@@ -4,13 +4,15 @@
     ALTER TABLE products ADD CHECK (price > 0);
   
   -- 2. На артикулы
-    ALTER TABLE products ADD CHECK (length(vendor_code) = 10)
+    ALTER TABLE products ADD CHECK (length(vendor_code) = 10);
   
   -- 3. На поле "есть на складе"
-    ALTER TABLE products ADD CHECK (goods_in_stock >= 0) 
+    ALTER TABLE products ADD CHECK (goods_in_stock >= 0);
 
 -- 2. Придумайте еще не менее двух ограничений в других таблицах 
 --    будущего интернет-магазина и реализуйте их
+  ALTER TABLE brands ADD CHECK (length(name) > 0);
+  ALTER TABLE brands ADD CHECK (class SIMILAR TO '[A-Z]');
 
 -- 3. Допустим, что поступило требование: каждый товар может отныне 
 --    находится в нескольких категориях сразу. Перепроектируйте таблицу 
