@@ -17,8 +17,16 @@
 -- 3. Допустим, что поступило требование: каждый товар может отныне 
 --    находится в нескольких категориях сразу. Перепроектируйте таблицу 
 --    товаров, используя поле categories bigint[] и напишите запросы:
+  -- Удаляем связь
+    ALTER TABLE products DROP CONSTRAINT products_brand_id_fkey;
+
+  -- Меняем тип поля
+    ALTER TABLE products ALTER COLUMN cat_id TYPE bigint[] USING array[cat_id]::bigint[];
   
   -- 1. Выбирающий все товары из заданной категории
+    SELECT *
+    FROM products
+    WHERE 6 = ANY(cat_id)
   
   -- 2. Выбирающий все категории и количество товаров в каждой из них
   
