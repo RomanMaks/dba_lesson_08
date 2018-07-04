@@ -29,6 +29,34 @@
     WHERE 6 = ANY(cat_id)
   
   -- 2. Выбирающий все категории и количество товаров в каждой из них
+    SELECT
+      *,
+      (
+        SELECT COUNT(*)
+        FROM products
+        WHERE categories.id = ANY(products.cat_id)
+      )
+    FROM categories
   
   -- 3. Добавляющий определенный товар в определенную категорию (вам 
   --    придется найти нужную функцию для работы с массивами)
+    INSERT INTO products (
+      vendor_code, 
+      name, 
+      price, 
+      old_price, 
+      picture, 
+      admission, 
+      goods_in_stock, 
+      brand_id, cat_id
+    ) VALUES (
+      '0000000021',
+      'Полтенце',
+      100,
+      0,
+      'http://www.test.ru/img21.jpg',
+      '2018-07-04',
+      100,
+      null,
+      ARRAY[4]
+    )
